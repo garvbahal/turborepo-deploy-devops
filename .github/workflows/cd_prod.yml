@@ -1,0 +1,31 @@
+name: Deploy to staging
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  redeploy:
+    name: Deploying the everything to production vm.
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH into the server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+            nvm use 24
+            cd turborepo-deploy-devops
+            git pull origin production
+            pnpm install
+            pnpm build
+            pm2 restart all
