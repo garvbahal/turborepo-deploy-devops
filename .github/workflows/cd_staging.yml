@@ -18,7 +18,13 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            nvm use 24.19.0
+            export NVM_DIR="$HOME/.nvm"
+
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+            nvm use 24
+            npm install -g pnpm pm2
             node -v
             pnpm -v
             npm -v
