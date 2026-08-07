@@ -10,5 +10,6 @@ server.on("connection", async (socket) => {
       password: Math.random().toString(),
     },
   });
+
   socket.send("Hi there you are connected to the server");
 });

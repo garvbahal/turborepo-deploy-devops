@@ -2,12 +2,15 @@
   "name": "@repo/db",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
   "exports": {
-    "./client": "./src/index.ts"
+    "./client": "./dist/src/index.js"
   },
+  "types": "./dist/src/index.d.ts",
   "keywords": [],
+  "scripts": {
+    "build": "tsc -b"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
