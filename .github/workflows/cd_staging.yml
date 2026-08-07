@@ -1,0 +1,27 @@
+name: Deploy to staging
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  redeploy:
+    name: Deploying the everything to staging vm.
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH into the server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            node -v
+            pnpm -v
+            cd turborepo-deploy-devops
+            git pull origin main
+            pnpm install
+            pnpm build
+            pm2 restart all
