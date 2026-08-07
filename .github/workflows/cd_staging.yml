@@ -24,10 +24,6 @@ jobs:
             [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
             nvm use 24
-            npm install -g pnpm pm2
-            node -v
-            pnpm -v
-            npm -v
             cd turborepo-deploy-devops
             git pull origin main
             pnpm install
