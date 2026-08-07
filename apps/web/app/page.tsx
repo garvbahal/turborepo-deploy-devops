@@ -9,6 +9,7 @@ export default async function Home() {
       <br />
       Password:
       {user?.password}
+      old skool mitra dii vibe baliye nii old skool
     </div>
   );
 }
