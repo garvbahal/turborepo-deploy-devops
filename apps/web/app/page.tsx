@@ -4,7 +4,7 @@ export default async function Home() {
   const user = await prisma.user.findFirst();
   return (
     <div>
-      First name:
+      First name mera ye haii:
       {user?.username}
       <br />
       Password:
