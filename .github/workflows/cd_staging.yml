@@ -20,6 +20,7 @@ jobs:
           script: |
             node -v
             pnpm -v
+            npm -v
             cd turborepo-deploy-devops
             git pull origin main
             pnpm install
